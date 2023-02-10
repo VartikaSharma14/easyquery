@@ -10,6 +10,7 @@ using Korzh.EasyQuery.Services;
 using EasyData.Export;
 using Npgsql;
 using System.Data.Common;
+using System;
 
 namespace EqDemo
 {
@@ -113,7 +114,7 @@ namespace EqDemo
 
     public class EasyQueryManagerSqlWithFilter : EasyQueryManagerSql
     {
-        public EasyQueryManagerSqlWithFilter(EasyQueryOptions options) : base(options)
+        public EasyQueryManagerSqlWithFilter(EasyQueryOptions options, IServiceProvider services) : base(options, services)
         {
         }
 
