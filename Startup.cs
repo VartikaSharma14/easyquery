@@ -86,7 +86,7 @@ namespace EqDemo
             {
                 string connectionstring = Configuration.GetConnectionString("EqDemoPostgres");
                 options.Endpoint = "/api/easyquery";
-                //options.ConnectionString = connectionstring;
+                options.ConnectionString = connectionstring;
                 options.UseManager<EasyQueryManagerSqlWithFilter>();
                 options.UseDbConnection<NpgsqlConnection>();
                 options.UseDbConnectionModelLoader();
