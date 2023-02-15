@@ -23,9 +23,9 @@ export class EasyQuery extends Component {
               onError: (_, error) => {
                 console.error(error.sourceError);
                 },
-                beforeLoadModel: (context, requestData) => {
+                beforeFetchData: (context, requestData) => {
                     requestData.data = requestData.data || {};
-                    requestData.data.connection = "Host=localhost;Database=postgres;Username=postgres;Password=Secure@123;Include Error Detail=true;";
+                    requestData.data.connection = "Host=localhost;Database=postgres;Username=postgres;Password=Secure@123;Include Error Detail=true;";              
                 }
             },
             widgets: {
@@ -43,13 +43,13 @@ export class EasyQuery extends Component {
 
         this.view = new AdvancedSearchView();
         this.context = this.view.getContext();
-
+        console.log(this.context);
         this.context
             .useEndpoint('/api/easyquery')
             .useEnterprise(() => {
                 this.view.init(viewOptions);
             });
-        console.log(this.context);
+        
         this.context.addEventListener('ready', () => {
             const query = this.context.getQuery();
 
