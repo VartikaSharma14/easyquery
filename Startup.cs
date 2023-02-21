@@ -121,10 +121,14 @@ namespace EqDemo
         protected override DbConnection GetConnectionCore()
         {
             var dbConnection = base.GetConnectionCore();
-            if (ClientData.TryGetValue("connection", out var conType))
+
+            dbConnection.ConnectionString = Model.Id switch
             {
-                dbConnection.ConnectionString = conType.ToString();
-            }
+                "test" => "Host=localhost;Database=postgres;Username=postgres;Password=Secure@123;Include Error Detail=true;",
+                _ => "Host=localhost;Database=xsiadapter;Username=postgres;Password=Secure@123;Include Error Detail=true;"
+            };
+
+
             return dbConnection;
         }
     }

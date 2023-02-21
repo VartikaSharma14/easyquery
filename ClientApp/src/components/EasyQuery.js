@@ -14,6 +14,8 @@ export class EasyQuery extends Component {
 
     componentDidMount() {
         const viewOptions = {
+            modelId: "test",
+            defaultModelId: "test",
             enableExport: true,
             serverExporters: ['pdf', 'excel', 'csv'],
             loadModelOnStart: true,
@@ -43,6 +45,7 @@ export class EasyQuery extends Component {
 
         this.view = new AdvancedSearchView();
         this.context = this.view.getContext();
+        
         console.log(this.context);
         this.context
             .useEndpoint('/api/easyquery')
