@@ -14,8 +14,7 @@ export class EasyQuery extends Component {
 
     componentDidMount() {
         const viewOptions = {
-            modelId: "test",
-            defaultModelId: "test",
+            defaultModelId: "Host=localhost;Database=xsiadapterv2;Username=postgres;Password=Secure@123;Include Error Detail=true;",
             enableExport: true,
             serverExporters: ['pdf', 'excel', 'csv'],
             loadModelOnStart: true,
@@ -24,10 +23,6 @@ export class EasyQuery extends Component {
             handlers: {
               onError: (_, error) => {
                 console.error(error.sourceError);
-                },
-                beforeFetchData: (context, requestData) => {
-                    requestData.data = requestData.data || {};
-                    requestData.data.connection = "Host=localhost;Database=postgres;Username=postgres;Password=Secure@123;Include Error Detail=true;";              
                 }
             },
             widgets: {

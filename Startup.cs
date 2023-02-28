@@ -51,7 +51,8 @@ namespace EqDemo
                     .RegisterDbGate<NpgSqlGate>()
                     .AddDefaultExporters()
                     .AddDataExporter<PdfDataExporter>("pdf")
-                    .AddDataExporter<ExcelDataExporter>("excel");
+                    .AddDataExporter<ExcelDataExporter>("excel")
+                    .AddDataExporter<CsvDataExporter>("csv");
 
             //to support non-Unicode code pages in PDF Exporter
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -84,13 +85,11 @@ namespace EqDemo
 
             app.UseEasyQuery((options) =>
             {
-                string connectionstring = Configuration.GetConnectionString("EqDemoPostgres");
-                options.Endpoint = "/api/easyquery";
-                options.ConnectionString = connectionstring;
+                options.Endpoint = "/api/easyquery";             
                 options.UseManager<EasyQueryManagerSqlWithFilter>();
                 options.UseDbConnection<NpgsqlConnection>();
                 options.UseDbConnectionModelLoader();
-                
+
             });
             app.UseEndpoints(endpoints =>
             {
@@ -122,13 +121,7 @@ namespace EqDemo
         {
             var dbConnection = base.GetConnectionCore();
 
-            dbConnection.ConnectionString = Model.Id switch
-            {
-                "test" => "Host=localhost;Database=postgres;Username=postgres;Password=Secure@123;Include Error Detail=true;",
-                _ => "Host=localhost;Database=xsiadapter;Username=postgres;Password=Secure@123;Include Error Detail=true;"
-            };
-
-
+            dbConnection.ConnectionString = Model.Id;
             return dbConnection;
         }
     }
